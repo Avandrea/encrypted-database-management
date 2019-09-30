@@ -12,7 +12,7 @@ This program manages an encrypted database using SQLiteCpp and sqlicipher.
 
 **OpenSSL**  
 Download version 1.0.2t from the link and install. The file to be downloaded is:  
-![image](https://github.com/Avandrea/encrypted-database-management/blob/master/images/openssl_installer.png)
+![image](images/openssl_installer.PNG)
 
 Come si fa l'encryption del db? Ci sono già librerie che lo fanno?  
 Si, sqlcipher. Si compila come sqlite. https://github.com/sqlcipher/sqlcipher (guida generica per modificare makefile per windows https://github.com/sqlitebrowser/sqlitebrowser/wiki/Win64-setup-%E2%80%94-Compiling-SQLCipher) 
