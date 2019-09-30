@@ -1,10 +1,17 @@
 # Visual Studio ignores
 .vs
+x64
 Bin
-DatabaseManagement/x64
-DatabaseManagement/x86
-*.sln
-*.vcxproj*
+databaseManager/x64
+databaseManager/x86
+#*.sln
+#*.vcxproj*
+*.vcxproj.filters
+*.vcxproj.user
+
+# SQLite ignores
+*.db
+*.db-journal
 
 # Prerequisites
 *.d

@@ -1,2 +1,2 @@
-# shared-database-management
-This program manages a shared encrypted database
+# encrypted-database-management
+This program manages an encrypted database
