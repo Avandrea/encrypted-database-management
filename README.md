@@ -1,7 +1,24 @@
-# encrypted-database-management
+# Encrypted Database Management
 
-This program manages an encrypted database using SQLiteCpp and sqlicipher.
+This program manages an encrypted database using SQLiteCpp and sqlicipher. In the second part of the README is explained how to prepare the system.
 
+## Usage
+
+Now it is possible to use SQLiteCpp and SQLCipher combined together. Set the platform to x64.
+In the new project add the following dependencies:
+- Configuration Properties -> C/C++ -> Additional Include Directories = `"C:\Libs\SQLiteCpp-master\include"`  
+- Configuration Properties -> Linker -> General -> Additional Library Directories = `"C:\Libs\SQLiteCpp-master\build\x64\Debug"` (Change Debug to Release if in Release mode)
+- Configuration Properties -> Linker -> Input -> Additional Dependencies = `sqlite3.lib;SQLiteCpp.lib;"C:\Libs\OpenSSL-Win64\lib\libeay32.lib";`
+
+The APIs are now the same as the standard SQLiteCpp with the possibiliy to use db->key(password) to encrypt the db.
+
+## databaseManagerTest.cpp
+This is the main of this project and it can be used to test whether the compilation completed succesfully.  
+When launching it, a database called `testdb.db` is created and filled with a table called `table1`. Then two threads are created and launched: one fills the database with random names and descriptors and one reads from `table1` and prints the results. After 10 seconds the program gets automatically closed.  
+
+In order to check whether the database has been encrypted it is possible to use [sqlitebrowser](https://sqlitebrowser.org/).
+
+# Build SQLiteCpp and SQLCipher together
 ## Requirements
 * [SQLiteCpp v2.4.0](https://github.com/SRombauts/SQLiteCpp)
 * [sqlcipher v3.4.2](https://github.com/sqlcipher/sqlcipher)
@@ -70,15 +87,6 @@ Download SQLiteCpp from github. It will contain a folder called `sqlite3\` and a
 
 - Build the projects sqlite3, SQLiteCpp and ALL_BUILD in both Debug and Releas.
 
-## Usage
-
-Now it is possible to use SQLiteCpp and SQLCipher combined together. Set the platform to x64.
-In the new project add the following dependencies:
-- Configuration Properties -> C/C++ -> Additional Include Directories = `"C:\Libs\SQLiteCpp-master\include"`  
-- Configuration Properties -> Linker -> General -> Additional Library Directories = `"C:\Libs\SQLiteCpp-master\build\x64\Debug"` (Change Debug to Release if in Release mode)
-- Configuration Properties -> Linker -> Input -> Additional Dependencies = `sqlite3.lib;SQLiteCpp.lib;"C:\Libs\OpenSSL-Win64\lib\libeay32.lib";`
-
-The APIs are now the same as the standard SQLiteCpp with the possibiliy to use db->key(password) to encrypt the db.
 
 ### Other links
 sqlcipher API https://www.zetetic.net/sqlcipher/sqlcipher-api/ 
