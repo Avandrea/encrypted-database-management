@@ -42,7 +42,7 @@ Download and install version 8.5.18 and install. The download requires to regist
 **SQLCipher**  
 - Download version 3.4.2 of SQLCipher from github. 
 
-- Create a folder `build` and copy the makefile `Makefile.msc` from `C:\...\encrypted-database-management\sqlcipher_makefile\` to the new build folder `C:\Libs\...\sqlcipher-3.4.2\build`.  
+- Create a folder `build` and copy the makefile `Makefile.msc` from `C:\...\encrypted-database-management\sqlcipher_license_and_makefile\` to the new build folder `C:\Libs\...\sqlcipher-3.4.2\build`.  
 This makefile is equal to the file from the sqlcipher github repository except for some small adjustments taken from [here](https://github.com/sqlitebrowser/sqlitebrowser/wiki/Win64-setup-%E2%80%94-Compiling-SQLCipher) and from many many compilation attempts.
 
 - Now open the Visual Studio 2015 Developer Command Prompt and launch  
