@@ -64,6 +64,7 @@ bool DatabaseManager::executeTransaction(const string& sqlstatement)
 		}
 		catch (const SQLite::Exception& e)
 		{
+			std::cout << "Cannot execute transaction beacuse of " << e.getErrorStr() << " " << e.getExtendedErrorCode() << std::endl;
 			throw Exception(e.getErrorCode(), e.getErrorStr());
 		}
 		catch (const std::runtime_error& e)
@@ -101,7 +102,8 @@ bool DatabaseManager::addElementToTable(const record_type& newrow, const string&
 		+ quoteSql(std::get<3>(newrow)) + ");";				//RESOURCEUID
 	return executeTransaction(sqlstatement);
 }
- 
+
+#include <stdio.h>
 bool DatabaseManager::encrypt(const std::string& pass) {
 	m_password = pass;
 	SQLite::Database* engine_db = (SQLite::Database*)m_rw_db;
@@ -112,7 +114,40 @@ bool DatabaseManager::encrypt(const std::string& pass) {
 	if (engine_db->isUnencrypted(m_path)) {
 		try
 		{
-			engine_db->key(pass);
+			// Remove encrypted and recreate it
+			std::string newpath = "C:\\Private\\Repos\\encrypted-database-management\\databaseManager\\testdb1.db";
+			if (remove(newpath.c_str()) != 0)
+				perror("Error deleting file");
+			else
+				puts("File successfully deleted");
+
+			std::ofstream outfile("testdb1.db");
+
+			// Attach new database
+			std::string sqlstatement = "ATTACH DATABASE " + quoteSql(newpath) + " AS testdb1 KEY 'testkey';";
+			engine_db->exec(sqlstatement);
+
+			// Copy all elements from non-encrypted to encrypted
+			sqlstatement = "SELECT sqlcipher_export('testdb1');";
+			engine_db->exec(sqlstatement);
+
+			// Detach new database
+			sqlstatement = "DETACH DATABASE testdb1;";
+			engine_db->exec(sqlstatement);
+
+			// Close old databse
+			engine_db->~Database();
+
+			// Open new encrypted database
+			m_rw_db = new SQLite::Database(newpath, SQLite::OPEN_READWRITE);
+			std::string oldpath = m_path;
+			m_path = newpath;
+
+			// Remove non-encrypted database
+			if (remove(oldpath.c_str()) != 0)
+				perror("Error deleting file");
+			else
+				puts("File successfully deleted");
 		}
 		catch (const SQLite::Exception& e)
 		{

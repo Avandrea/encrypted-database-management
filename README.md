@@ -10,11 +10,13 @@ In the new project add the following dependencies:
 - Configuration Properties -> Linker -> General -> Additional Library Directories = `"C:\Libs\SQLiteCpp-master\build\x64\Debug"` (Change Debug to Release if in Release mode)
 - Configuration Properties -> Linker -> Input -> Additional Dependencies = `sqlite3.lib;SQLiteCpp.lib;"C:\Libs\OpenSSL-Win64\lib\libeay32.lib";`
 
-The APIs are now the same as the standard SQLiteCpp with the possibiliy to use db->key(password) to encrypt the db.
+The APIs are now the same as the standard SQLiteCpp with the possibiliy to use db->key(password) to decrypt the db and db->rekey(password) to encrypt it.
+Remember that whenever a new database is created it is not encrypted and its default passowrd is an empty string, when changing the password to a non-empty string you are actually encrypting the db.
 
 ## databaseManagerTest.cpp
 This is the main of this project and it can be used to test whether the compilation completed succesfully.  
 When launching it, a database called `testdb.db` is created and filled with a table called `table1`. Then two threads are created and launched: one fills the database with random names and descriptors and one reads from `table1` and prints the results. After 10 seconds the program gets automatically closed.  
+If the `testdb.db` already exists and it is not encrypted, a new encrypted database called `testdb1.db` is created and all the data from `testdb.db` are cloned inside `testdb1.db`. Eventually, `testdb.db` is deleted and `testdb1.db` becomes the main database.
 
 In order to check whether the database has been encrypted it is possible to use [sqlitebrowser](https://sqlitebrowser.org/).
 
@@ -95,4 +97,8 @@ sqlitecpp functions http://fossil.twicetwo.com/index.pl/epic-quest-land/artifact
 
 lib problem solution http://thebugfreeblog.blogspot.com/2012/08/compiling-sqlcipher-for-windows.html 
 
- 
+### TODO
+- [x] Implement non-encrypted -> encrypted
+- [ ] Implement a simple console interface in order to insert the db name and choose whether to use an encrypted database or not.
+- [ ] Implement encrypted -> non-encrypted
+

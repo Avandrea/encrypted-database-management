@@ -109,8 +109,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sqlite3.lib;SQLiteCpp.lib;"C:\Libs\OpenSSL-Win64\lib\libeay32.lib";</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Libs\SQLiteCpp-master\build\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sqlite3.lib;SQLiteCppCipher.lib;"C:\Libs\OpenSSL-Win64\lib\libeay32.lib";</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Libs\SQLiteCpp-master\build\x64\Debug;C:\Libs\SQLiteCpp-master\build\x64\sqlite3\Debug;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -149,8 +149,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sqlite3.lib;SQLiteCpp.lib;"C:\Libs\OpenSSL-Win64\lib\libeay32.lib";</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Libs\SQLiteCpp-master\build\x64\Release;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sqlite3.lib;SQLiteCppCipher.lib;"C:\Libs\OpenSSL-Win64\lib\libeay32.lib";</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Libs\SQLiteCpp-master\build\x64\Release;C:\Libs\SQLiteCpp-master\build\x64\sqlite3\Release;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
