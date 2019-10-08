@@ -14,14 +14,17 @@ using namespace DatabaseException;
 
 DatabaseManager::DatabaseManager(const std::string& path, const std::string& name)
 {
+	m_name = name;
 	m_path = path;
 	fs::create_directory(m_path);
+	m_directoryPath = m_path;
 	m_path += "/" + name;
 	// Create database file if it does not exist.
 	if (!fs::exists(m_path))
 		std::ofstream{ m_path };
 	try
 	{
+		std::cout << "Opening database called " << m_path << std::endl;
 		m_rw_db = new SQLite::Database(m_path, SQLite::OPEN_READWRITE);
 	}
 	catch (...)
@@ -103,7 +106,6 @@ bool DatabaseManager::addElementToTable(const record_type& newrow, const string&
 	return executeTransaction(sqlstatement);
 }
 
-#include <stdio.h>
 bool DatabaseManager::encrypt(const std::string& pass) {
 	m_password = pass;
 	SQLite::Database* engine_db = (SQLite::Database*)m_rw_db;
@@ -114,14 +116,22 @@ bool DatabaseManager::encrypt(const std::string& pass) {
 	if (engine_db->isUnencrypted(m_path)) {
 		try
 		{
+			// add _plain instead of _encrypted if necessary
+			std::string newname = m_name;
+			auto pos = m_name.find("_plain");
+			if (pos != 0)
+				newname.replace(pos, pos + 10, "_encrypted");
+			else
+				newname += "_encrypted";
+
 			// Remove encrypted and recreate it
-			std::string newpath = "C:\\Private\\Repos\\encrypted-database-management\\databaseManager\\testdb1.db";
+			std::string newpath = m_directoryPath + "\\" + newname;
 			if (remove(newpath.c_str()) != 0)
 				perror("Error deleting file");
 			else
 				puts("File successfully deleted");
 
-			std::ofstream outfile("testdb1.db");
+			std::ofstream outfile(newpath);
 
 			// Attach new database
 			std::string sqlstatement = "ATTACH DATABASE " + quoteSql(newpath) + " AS testdb1 KEY 'testkey';";
@@ -139,6 +149,7 @@ bool DatabaseManager::encrypt(const std::string& pass) {
 			engine_db->~Database();
 
 			// Open new encrypted database
+			std::cout << "Opening database called " << newpath << std::endl;
 			m_rw_db = new SQLite::Database(newpath, SQLite::OPEN_READWRITE);
 			std::string oldpath = m_path;
 			m_path = newpath;
@@ -156,6 +167,68 @@ bool DatabaseManager::encrypt(const std::string& pass) {
 		}
 	}
 	return true;
+}
+
+bool DatabaseManager::decrypt(const std::string& pass) {
+	m_password = pass;
+	SQLite::Database* engine_db = (SQLite::Database*)m_rw_db;
+
+	// Check if is encrypted
+	if (!engine_db->isUnencrypted(m_path)) {
+		// decrypt db
+		try
+		{
+			// add _plain instead of _encrypted if necessary
+			std::string newname = m_name;
+			auto pos = m_name.find("_encrypted");
+			if (pos != 0)
+				newname.replace(pos, pos + 10, "_plain");
+			else
+				newname += "_plain";
+
+			// Remove decrypted and recreate it
+			std::string newpath = m_directoryPath + "\\" + newname;
+			if (remove(newpath.c_str()) != 0)
+				perror("Error deleting file");
+			else
+				puts("File successfully deleted");
+
+			std::ofstream outfile(newpath);
+
+			// Attach new database
+			engine_db->key(m_password);
+			std::string sqlstatement = "ATTACH DATABASE " + quoteSql(newpath) + " AS testdb1;";
+			engine_db->exec(sqlstatement);
+
+			// Copy all elements from non-encrypted to encrypted
+			sqlstatement = "SELECT sqlcipher_export('testdb1');";
+			engine_db->exec(sqlstatement);
+
+			// Detach new database
+			sqlstatement = "DETACH DATABASE testdb1;";
+			engine_db->exec(sqlstatement);
+
+			// Close old databse
+			engine_db->~Database();
+
+			// Open new encrypted database
+			std::cout << "Opening database called " << newpath << std::endl;
+			m_rw_db = new SQLite::Database(newpath, SQLite::OPEN_READWRITE);
+			std::string oldpath = m_path;
+			m_path = newpath;
+
+			// Remove non-encrypted database
+			if (remove(oldpath.c_str()) != 0)
+				perror("Error deleting file");
+			else
+				puts("File successfully deleted");
+		}
+		catch (const SQLite::Exception& e)
+		{
+			std::cout << "Cannot decrypt database beacuse of " << e.getErrorStr() << std::endl;
+			return false;
+		}
+	}
 }
 
 /* Manage print threads */

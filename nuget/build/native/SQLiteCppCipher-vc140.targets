@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Debug and static and RuntimeLibraryNull" Condition="( $(Configuration.ToLower().IndexOf('debug')) &gt; -1 ) And '$(Linkage-SQLiteCppCipher-vc140.ToLower())' == 'static' And ('$(RuntimeLibrary)' == '')">
+    <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+  </PropertyGroup>
+  <PropertyGroup Label="Release and static and RuntimeLibraryNull" Condition="( $(Configuration.ToLower().IndexOf('debug')) == -1 ) And '$(Linkage-SQLiteCppCipher-vc140.ToLower())' == 'static' And ('$(RuntimeLibrary)' == '')">
+    <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+  </PropertyGroup>
+  <PropertyGroup Label="Default initializers for properties">
+    <Linkage-SQLiteCppCipher-vc140 Condition="'$(Linkage-SQLiteCppCipher-vc140)' == ''">static</Linkage-SQLiteCppCipher-vc140>
+  </PropertyGroup>
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)\default-propertiesui.xml" />
+  </ItemGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Label="Win32 and v140 and Debug and static and Unicode" Condition="'$(Platform.ToLower())' == 'win32' And ( $(PlatformToolset.ToLower().IndexOf('v140')) &gt; -1 Or '$(PlatformToolset.ToLower())' == 'windowskernelmodedriver8.0' Or '$(PlatformToolset.ToLower())' == 'windowsapplicationfordrivers8.0' Or '$(PlatformToolset.ToLower())' == 'windowsusermodedriver8.0' ) And ( $(Configuration.ToLower().IndexOf('debug')) &gt; -1 ) And '$(Linkage-SQLiteCpp-vc140.ToLower())' == 'static' And '$(CharacterSet.ToLower())' == 'unicode'">
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)lib/Win32\v140\Debug\static\Unicode\SQLiteCppCipher.lib;$(MSBuildThisFileDirectory)lib/Win32\v140\Debug\static\Unicode\sqlite3.lib;$(MSBuildThisFileDirectory)lib/Win32\v140\Debug\static\Unicode\libeay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Label="Win32 and v140 and Release and static and Unicode" Condition="'$(Platform.ToLower())' == 'win32' And ( $(PlatformToolset.ToLower().IndexOf('v140')) &gt; -1 Or '$(PlatformToolset.ToLower())' == 'windowskernelmodedriver8.0' Or '$(PlatformToolset.ToLower())' == 'windowsapplicationfordrivers8.0' Or '$(PlatformToolset.ToLower())' == 'windowsusermodedriver8.0' ) And ( $(Configuration.ToLower().IndexOf('debug')) == -1 ) And '$(Linkage-SQLiteCpp-vc140.ToLower())' == 'static' And '$(CharacterSet.ToLower())' == 'unicode'">
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)lib/Win32\v140\Release\static\Unicode\SQLiteCppCipher.lib;$(MSBuildThisFileDirectory)lib/Win32\v140\Release\static\Unicode\sqlite3.lib;$(MSBuildThisFileDirectory)lib/Win32\v140\Debug\static\Unicode\libeay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Label="x64 and v140 and Debug and static and Unicode" Condition="'$(Platform.ToLower())' == 'x64' And ( $(PlatformToolset.ToLower().IndexOf('v140')) &gt; -1 Or '$(PlatformToolset.ToLower())' == 'windowskernelmodedriver8.0' Or '$(PlatformToolset.ToLower())' == 'windowsapplicationfordrivers8.0' Or '$(PlatformToolset.ToLower())' == 'windowsusermodedriver8.0' ) And ( $(Configuration.ToLower().IndexOf('debug')) &gt; -1 ) And '$(Linkage-SQLiteCpp-vc140.ToLower())' == 'static' And '$(CharacterSet.ToLower())' == 'unicode'">
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)lib/x64\v140\Debug\static\Unicode\SQLiteCppCipher.lib;$(MSBuildThisFileDirectory)lib/x64\v140\Debug\static\Unicode\sqlite3.lib;$(MSBuildThisFileDirectory)lib/Win32\v140\Debug\static\Unicode\libeay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Label="x64 and v140 and Release and static and Unicode" Condition="'$(Platform.ToLower())' == 'x64' And ( $(PlatformToolset.ToLower().IndexOf('v140')) &gt; -1 Or '$(PlatformToolset.ToLower())' == 'windowskernelmodedriver8.0' Or '$(PlatformToolset.ToLower())' == 'windowsapplicationfordrivers8.0' Or '$(PlatformToolset.ToLower())' == 'windowsusermodedriver8.0' ) And ( $(Configuration.ToLower().IndexOf('debug')) == -1 ) And '$(Linkage-SQLiteCpp-vc140.ToLower())' == 'static' And '$(CharacterSet.ToLower())' == 'unicode'">
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)lib/x64\v140\Release\static\Unicode\SQLiteCppCipher.lib;$(MSBuildThisFileDirectory)lib/x64\v140\Release\static\Unicode\sqlite3.lib;$(MSBuildThisFileDirectory)lib/Win32\v140\Debug\static\Unicode\libeay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>

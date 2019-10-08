@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>SQLiteCppCipher-vc140</id>
+    <version>2.4.0</version>
+    <title>SQLiteCpp C++ wrapper for SQLite3 with encryption</title>
+    <authors>SRombauts</authors>
+    <owners>Andrea Avigni</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">BSD-3-Clause</license>
+    <projectUrl>https://srombauts.github.io/SQLiteCpp/ https://github.com/sqlcipher/sqlcipher</projectUrl>
+    <description>SQLiteC++ (SQLiteCpp) is a smart and easy to use C++ SQLite3 wrapper.
+
+SQLiteC++ offers an encapsulation around the native C APIs of SQLite, with a few intuitive and well documented C++ classes.
+This package includes SQLiteCipher so as to use encryption over databases.
+This package contains build for VS2015, for both statically linked and DLL CRT; you can switch the CRT linkage in Project -> Properties -> Referenced Packages -> SQLiteCpp-vc140.</description>
+    <summary>SQLiteC++ (SQLiteCpp) is a smart and easy to use C++ SQLite3 wrapper.</summary>
+    <releaseNotes>https://github.com/SRombauts/SQLiteCpp/tags/2.4.0 https://github.com/sqlcipher/sqlcipher/tags/v3.4.2</releaseNotes>
+    <copyright>SQLiteCpp Copyright (C) 2012-2018 S�bastien Rombauts SQLCipher Copyright (c) 2008, ZETETIC LLC</copyright>
+    <tags>native nativepackage sqlitecpp sqlite sqlite3 C++ wrapper vc140 Win32 x64 static Unicode</tags>
+  </metadata>
+  <files>
+    <file src="build\native\default-propertiesui.xml" target="build\native\default-propertiesui.xml" />
+    <file src="build\native\SQLiteCppCipher-vc140.targets" target="build\native\SQLiteCppCipher-vc140.targets" />
+    <file src="..\README.md" target="build/native/docs/README.md" />
+    <file src="..\LICENSE.txt" target="build/native/docs/LICENSE.txt" />
+    <file src="..\include\SQLiteCpp\Assertion.h" target="build/native/include/SQLiteCpp\Assertion.h" />
+    <file src="..\include\SQLiteCpp\Backup.h" target="build/native/include/SQLiteCpp\Backup.h" />
+    <file src="..\include\SQLiteCpp\Column.h" target="build/native/include/SQLiteCpp\Column.h" />
+    <file src="..\include\SQLiteCpp\Database.h" target="build/native/include/SQLiteCpp\Database.h" />
+    <file src="..\include\SQLiteCpp\Exception.h" target="build/native/include/SQLiteCpp\Exception.h" />
+    <file src="..\include\SQLiteCpp\SQLiteCpp.h" target="build/native/include/SQLiteCpp\SQLiteCpp.h" />
+    <file src="..\include\SQLiteCpp\Statement.h" target="build/native/include/SQLiteCpp\Statement.h" />
+    <file src="..\include\SQLiteCpp\Transaction.h" target="build/native/include/SQLiteCpp\Transaction.h" />
+    <file src="..\include\SQLiteCpp\VariadicBind.h" target="build/native/include/SQLiteCpp\VariadicBind.h" />
+    <file src="..\build\Win32\sqlite3\Debug\sqlite3.lib" target="build/native/lib/Win32\v140\Debug\static\Unicode\sqlite3.lib" />
+    <file src="..\build\Win32\sqlite3\Debug\sqlite3.pdb" target="build/native/lib/Win32\v140\Debug\static\Unicode\sqlite3.pdb" />
+    <file src="..\build\Win32\Debug\SQLiteCppCipher.lib" target="build/native/lib/Win32\v140\Debug\static\Unicode\SQLiteCppCipher.lib" />
+    <file src="..\build\Win32\Debug\SQLiteCppCipher.pdb" target="build/native/lib/Win32\v140\Debug\static\Unicode\SQLiteCppCipher.pdb" />
+    <file src="..\build\Win32\sqlite3\Release\sqlite3.lib" target="build/native/lib/Win32\v140\Release\static\Unicode\sqlite3.lib" />
+    <file src="..\build\Win32\Release\SQLiteCppCipher.lib" target="build/native/lib/Win32\v140\Release\static\Unicode\SQLiteCppCipher.lib" />
+    <file src="..\build\x64\sqlite3\Debug\sqlite3.lib" target="build/native/lib/x64\v140\Debug\static\Unicode\sqlite3.lib" />
+    <file src="..\build\x64\sqlite3\Debug\sqlite3.pdb" target="build/native/lib/x64\v140\Debug\static\Unicode\sqlite3.pdb" />
+    <file src="..\build\x64\Debug\SQLiteCppCipher.lib" target="build/native/lib/x64\v140\Debug\static\Unicode\SQLiteCppCipher.lib" />
+    <file src="..\build\x64\Debug\SQLiteCppCipher.pdb" target="build/native/lib/x64\v140\Debug\static\Unicode\SQLiteCppCipher.pdb" />
+    <file src="..\build\x64\sqlite3\Release\sqlite3.lib" target="build/native/lib/x64\v140\Release\static\Unicode\sqlite3.lib" />
+    <file src="..\build\x64\Release\SQLiteCppCipher.lib" target="build/native/lib/x64\v140\Release\static\Unicode\SQLiteCppCipher.lib" />
+    <file src="..\build\libeay32\libeay32.lib" target="build/native/lib/x64\v140\Release\static\Unicode\libeay32.lib" />
+    <file src="..\build\libeay32\libeay32.lib" target="build/native/lib/x64\v140\Debug\static\Unicode\libeay32.lib" />
+    <file src="..\build\libeay32\libeay32.lib" target="build/native/lib/Win32\v140\Release\static\Unicode\libeay32.lib" />
+    <file src="..\build\libeay32\libeay32.lib" target="build/native/lib/Win32\v140\Debug\static\Unicode\libeay32.lib" />
+  </files>
+</package>

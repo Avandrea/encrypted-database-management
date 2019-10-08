@@ -22,6 +22,7 @@ public:
 	bool addElementToTable(const record_type& newrow, const std::string& tableName);
 	 
 	bool encrypt(const std::string& pass);
+	bool decrypt(const std::string& pass);
 
 	void startPrintThread(const std::string& tableName);
 	void stopPrintThread();
@@ -31,6 +32,7 @@ public:
 	void closeDatabase();
 
 private:
+	std::string m_directoryPath;
 	std::string m_path;
 	std::string m_name;
 	void* m_rw_db;

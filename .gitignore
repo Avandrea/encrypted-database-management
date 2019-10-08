@@ -12,6 +12,8 @@ databaseManager/x86
 # SQLite ignores
 *.db
 *.db-journal
+*_encrypted
+*_plain 
 
 # Prerequisites
 *.d

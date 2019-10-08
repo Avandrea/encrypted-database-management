@@ -15,8 +15,13 @@ Remember that whenever a new database is created it is not encrypted and its def
 
 ## databaseManagerTest.cpp
 This is the main of this project and it can be used to test whether the compilation completed succesfully.  
-When launching it, a database called `testdb.db` is created and filled with a table called `table1`. Then two threads are created and launched: one fills the database with random names and descriptors and one reads from `table1` and prints the results. After 10 seconds the program gets automatically closed.  
-If the `testdb.db` already exists and it is not encrypted, a new encrypted database called `testdb1.db` is created and all the data from `testdb.db` are cloned inside `testdb1.db`. Eventually, `testdb.db` is deleted and `testdb1.db` becomes the main database.
+When launching it, the user will be asked 3 questions from command line:  
+- a database name
+- a password that will be used only if you are trying to open an already encrypted database or a new encrypted database
+- whether you want to encrypt the database or not
+
+At this point, a new database called `<db_name>_encrypted` or `<db_name>_plain` is created and filled with a table called `table1`. Then two threads are created and launched: one fills the database with random names and descriptors and one reads from `table1` and prints the results. After 10 seconds the program gets automatically closed.  
+If the `<db_name>` already exists and it is not encrypted, a new encrypted database called `<db_name>_encrypted` or `<db_name>_plain` is created and all the data from `<db_name>` are cloned inside. Eventually, `<db_name>` is deleted and `<db_name>_encrypted` or `<db_name>_plain` becomes the main database.
 
 In order to check whether the database has been encrypted it is possible to use [sqlitebrowser](https://sqlitebrowser.org/).
 
@@ -89,16 +94,20 @@ Download SQLiteCpp from github. It will contain a folder called `sqlite3\` and a
 
 - Build the projects sqlite3, SQLiteCpp and ALL_BUILD in both Debug and Releas.
 
+## Creating a nuget package
+Follow [this](https://www.wiliam.com.au/wiliam-blog/creating-a-nuget-package) tutorial and use the files already present inside `nuget/` folder.
 
 ### Other links
 sqlcipher API https://www.zetetic.net/sqlcipher/sqlcipher-api/ 
 
 sqlitecpp functions http://fossil.twicetwo.com/index.pl/epic-quest-land/artifact/41105b83e76bdd5e 
 
-lib problem solution http://thebugfreeblog.blogspot.com/2012/08/compiling-sqlcipher-for-windows.html 
+lib problem solution http://thebugfreeblog.blogspot.com/2012/08/compiling-sqlcipher-for-windows.html  
+
+How to create a nuget package https://www.wiliam.com.au/wiliam-blog/creating-a-nuget-package
 
 ### TODO
 - [x] Implement non-encrypted -> encrypted
-- [ ] Implement a simple console interface in order to insert the db name and choose whether to use an encrypted database or not.
-- [ ] Implement encrypted -> non-encrypted
-
+- [x] Implement a simple console interface in order to insert the db name and choose whether to use an encrypted database or not.
+- [x] Implement encrypted -> non-encrypted
+- [ ] Test the program with the nuget package of SQLiteCppCipher
