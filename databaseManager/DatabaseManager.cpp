@@ -236,6 +236,10 @@ void DatabaseManager::printDbData(const std::string& tableName) {
 	std::string sqlstatement = "SELECT descriptor, name, surname FROM " + quoteSql(tableName) + ";";
 
 	while (m_printdata_thread_running) {
+		// Wait for 10 seconds
+		std::chrono::milliseconds timespan(10000);
+		std::this_thread::sleep_for(timespan);
+
 		// Get data
 		if (m_rw_db) {
 			SQLite::Database* engine_db = (SQLite::Database*)m_rw_db;
@@ -259,9 +263,6 @@ void DatabaseManager::printDbData(const std::string& tableName) {
 				std::cout << "Cannot insert values beacuse of " << e.getErrorStr() << std::endl;
 			}
 		}
-
-		std::chrono::milliseconds timespan(1000);
-		std::this_thread::sleep_for(timespan);
 	}
 }
 
